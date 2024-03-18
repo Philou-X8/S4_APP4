@@ -1,39 +1,31 @@
-Circuit: * C:\Users\phild\Documents\Uni\S4\APP4\S4iAPP4_prob\nand_test.asc
+Circuit: * C:\Users\phild\Documents\Uni\S4\APP4\S4_APP4\S4iAPP4_prob\nand_test.asc
 
-WARNING: Node X9:NC_02 is floating.
-WARNING: Node X9:NC_03 is floating.
-WARNING: Node X9:NC_04 is floating.
-
-WARNING: Less than two connections to node X9:NC_01.  This node is used by M:X9:7.
-WARNING: Less than two connections to node X9:NC_02.  This node is used by M:X9:7.
-WARNING: Less than two connections to node X9:NC_03.  This node is used by M:X9:7.
-WARNING: Less than two connections to node X9:NC_04.  This node is used by M:X9:7.
 Direct Newton iteration for .op point succeeded.
 
-t1: time=3.03008e-009 at 3.03008e-009
-t2: time=3.24657e-009 at 3.24657e-009
-t3: time=2.07302e-009 at 2.07302e-009
-t4: time=2.01126e-009 at 2.01126e-009
-transition_up: abs(t2-t1)=2.16491e-010
-transition_down: abs(t4-t3)=6.17599e-011
+t1: time=3.0164e-009 at 3.0164e-009
+t2: time=3.1311e-009 at 3.1311e-009
+t3: time=2.0861e-009 at 2.0861e-009
+t4: time=2.01446e-009 at 2.01446e-009
+transition_up: abs(t2-t1)=1.14708e-010
+transition_down: abs(t4-t3)=7.1641e-011
 
 Measurement "ratio" FAIL'ed
 
 
-Date: Mon Mar 18 11:26:20 2024
-Total elapsed time: 0.147 seconds.
+Date: Mon Mar 18 12:02:23 2024
+Total elapsed time: 0.124 seconds.
 
 tnom = 27
 temp = 27
 method = modified trap
-totiter = 2565
-traniter = 2555
+totiter = 2589
+traniter = 2583
 tranpoints = 1244
 accept = 1177
 rejected = 67
-matrix size = 12
+matrix size = 8
 fillins = 0
 solver = Normal
-Matrix Compiler1: 724 bytes object code size  0.1/0.1/[0.1]
-Matrix Compiler2: 1002 bytes object code size  0.1/0.1/[0.1]
+Matrix Compiler1: 282 bytes object code size  0.1/0.1/[0.0]
+Matrix Compiler2: 642 bytes object code size  0.1/0.1/[0.0]
 
