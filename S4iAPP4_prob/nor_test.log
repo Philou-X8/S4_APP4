@@ -1,0 +1,31 @@
+Circuit: * C:\Users\phild\Documents\Uni\S4\APP4\S4_APP4\S4iAPP4_prob\nor_test.asc
+
+Direct Newton iteration for .op point succeeded.
+
+t1: time=3.02986e-009 at 3.02986e-009
+t2: time=4.09915e-009 at 4.09915e-009
+t3: time=1.10345e-009 at 1.10345e-009
+t4: time=1.02035e-009 at 1.02035e-009
+transition_up: abs(t2-t1)=1.06929e-009
+transition_down: abs(t4-t3)=8.30961e-011
+
+Measurement "ratio" FAIL'ed
+
+
+Date: Mon Mar 18 12:36:47 2024
+Total elapsed time: 0.114 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2716
+traniter = 2710
+tranpoints = 1296
+accept = 1223
+rejected = 73
+matrix size = 8
+fillins = 0
+solver = Normal
+Matrix Compiler1:      17 opcodes  0.1/[0.0]/0.1
+Matrix Compiler2: off  [0.1]/0.1/0.1
+
