@@ -2,30 +2,30 @@ Circuit: * C:\Users\phild\Documents\Uni\S4\APP4\S4_APP4\S4iAPP4_prob\xor_test.as
 
 Direct Newton iteration for .op point succeeded.
 
-t1: time=1.06586e-009 at 1.06586e-009
-t2: time=1.19551e-009 at 1.19551e-009
-t3: time=2.13127e-009 at 2.13127e-009
-t4: time=2.01599e-009 at 2.01599e-009
-transition_up: abs(t2-t1)=1.29653e-010
-transition_down: abs(t4-t3)=1.15278e-010
+t1: time=1.06641e-009 at 1.06641e-009
+t2: time=1.19558e-009 at 1.19558e-009
+t3: time=2.13036e-009 at 2.13036e-009
+t4: time=2.01592e-009 at 2.01592e-009
+transition_up: abs(t2-t1)=1.29172e-010
+transition_down: abs(t4-t3)=1.14433e-010
 
 Measurement "ratio" FAIL'ed
 
 
-Date: Tue Mar 19 10:01:58 2024
-Total elapsed time: 0.147 seconds.
+Date: Tue Mar 19 10:03:51 2024
+Total elapsed time: 0.139 seconds.
 
 tnom = 27
 temp = 27
 method = modified trap
-totiter = 2731
-traniter = 2703
-tranpoints = 1254
+totiter = 2730
+traniter = 2702
+tranpoints = 1253
 accept = 1185
-rejected = 69
+rejected = 68
 matrix size = 13
 fillins = 0
 solver = Normal
 Matrix Compiler1: 924 bytes object code size  0.2/0.1/[0.1]
-Matrix Compiler2: 1.38 KB object code size  0.1/0.2/[0.1]
+Matrix Compiler2: 1.38 KB object code size  0.1/0.1/[0.1]
 

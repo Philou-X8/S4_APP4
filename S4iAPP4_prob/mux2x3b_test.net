@@ -1,0 +1,50 @@
+* C:\Users\phild\Documents\Uni\S4\APP4\S4_APP4\S4iAPP4_prob\mux2x3b_test.asc
+XU1 o1 o2 o3 out Bin2Dec Vhigh={vv}
+XU2 b b1 b2 b3 Dec2Bin Vhigh={vv}
+XU3 a a1 a2 a3 Dec2Bin Vhigh={vv}
+V1 vss 0 1.8
+Va a 0 3
+Vb b 0 5
+Vsel sel 0 PULSE(0 1.8 1n 10p 10p 1n 2n 5)
+XX2 vss a1 a2 a3 b1 b2 b3 0 o1 o2 o3 sel mux2x3b params: ll=180n wn={2*nnw} wp={nnw*mp}
+
+* block symbol definitions
+.subckt mux2x3b vdd a1 a2 a3 b1 b2 b3 vss o1 o2 o3 sel
+M1 a3 sel N005 vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+M2 N005 sel b3 vss NMOS l={ll} w={1*{wn}} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+M3 vdd N005 N006 vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+M4 N006 N005 vss vss NMOS l={ll} w={1*{wn}} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+M5 vdd N006 o3 vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+M6 o3 N006 vss vss NMOS l={ll} w={1*{wn}} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+M7 a2 sel N003 vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+M8 N003 sel b2 vss NMOS l={ll} w={1*{wn}} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+M9 vdd N003 N004 vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+M10 N004 N003 vss vss NMOS l={ll} w={1*{wn}} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+M11 vdd N004 o2 vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+M12 o2 N004 vss vss NMOS l={ll} w={1*{wn}} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+M13 a1 sel N001 vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+M14 N001 sel b1 vss NMOS l={ll} w={1*{wn}} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+M15 vdd N001 N002 vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+M16 N002 N001 vss vss NMOS l={ll} w={1*{wn}} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+M17 vdd N002 o1 vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+M18 o1 N002 vss vss NMOS l={ll} w={1*{wn}} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+.ends mux2x3b
+
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\phild\Documents\LTspiceXVII\lib\cmp\standard.mos
+.param vv=1.8 nnw=180n mp=2.21
+.lib BU_180nm.lib
+.op
+.tran 0 10n 0 10p
+.meas tran t1 find time when v(o3)=vv*0.1 rise 1
+.meas tran t2 find time when v(o3)=vv*0.9 rise 1
+.meas tran t3 find time when v(o3)=vv*0.1 fall 1
+.meas tran t4 find time when v(o3)=vv*0.9 fall 1
+.meas tran transition_up param abs(t2-t1)
+.meas tran transition_down param abs(t4-t3)
+.meas tran ratio param upslope/downslope
+.lib Bin2Dec.sub
+.lib Dec2Bin.sub
+.backanno
+.end
