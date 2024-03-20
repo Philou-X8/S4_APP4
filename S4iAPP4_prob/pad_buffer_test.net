@@ -1,0 +1,32 @@
+* C:\Users\phild\Documents\Uni\S4\APP4\S4_APP4\S4iAPP4_prob\pad_buffer_test.asc
+V1 vdd 0 {vv}
+V2 vin 0 PULSE(0 {vv} 1000p 1p 1p 2000p 4000p 5)
+C1 out 0 1.5p
+XX11 vin out vdd 0 pad_buffer
+
+* block symbol definitions
+.subckt pad_buffer In out vdd vss
+XX1 in N001 vdd vss inv params: ll=180n wn={nnw} wp={nnw*mp}
+XX2 N001 N002 vdd vss inv params: ll=180n wn={10*nnw} wp={10*nnw*mp}
+XX3 N002 N003 vdd vss inv params: ll=180n wn={50*nnw} wp={50*nnw*mp}
+XX4 N003 N004 vdd vss inv params: ll=180n wn={100*nnw} wp={100*nnw*mp}
+XX5 N004 N005 vdd vss inv params: ll=180n wn={500*nnw} wp={500*nnw*mp}
+XX6 N005 out vdd vss inv params: ll=180n wn={1500*nnw} wp={1500*nnw*mp}
+.param wpad=360u nnw=180n mp=2.16 fac=0.5
+.lib BU_180nm.lib
+.ends pad_buffer
+
+.subckt inv In _Q vdd vss
+M1 _Q In vss vss NMOS l={ll} w={wn} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+M2 vdd In _Q vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+.lib BU_180nm.lib
+.ends inv
+
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\phild\Documents\LTspiceXVII\lib\cmp\standard.mos
+.param vv=1.8
+.lib BU_180nm.lib
+.tran 0 10000p 0 10p
+.backanno
+.end

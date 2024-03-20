@@ -1,0 +1,52 @@
+* C:\Users\phild\Documents\Uni\S4\APP4\S4_APP4\S4iAPP4_prob\and3b_test.asc
+XU1 o1 o2 o3 out Bin2Dec Vhigh={vv}
+XU2 b b1 b2 b3 Dec2Bin Vhigh={vv}
+XU3 a a1 a2 a3 Dec2Bin Vhigh={vv}
+V1 vss 0 1.8
+XX1 vss a1 a2 a3 b1 b2 b3 0 o1 o2 o3 and3b params: ll=180n wn={nnw} wp={nnw*mp}
+Vsel1 sel 0 1.8
+Va1 a 0 PULSE(0 {vv} 2000p 1p 1p 2000p 4000p 5)
+Vb1 b 0 PULSE(0 {vv} 1000p 1p 1p 2000p 4000p 5)
+
+* block symbol definitions
+.subckt and3b vdd a1 a2 a3 b1 b2 b3 vss o1 o2 o3
+XX1 a1 N001 vdd vss b1 nand params: NAND ll=180n wn={2*nnw} wp={1.5*nnw*mp}
+XX2 N001 o1 vdd vss inv params: ll=180n wn={nnw} wp={nnw*mp}
+XX3 a2 N002 vdd vss b2 nand params: NAND ll=180n wn={2*nnw} wp={1.5*nnw*mp}
+XX4 N002 o2 vdd vss inv params: ll=180n wn={nnw} wp={nnw*mp}
+XX5 a3 N003 vdd vss b3 nand params: NAND ll=180n wn={2*nnw} wp={1.5*nnw*mp}
+XX6 N003 o3 vdd vss inv params: ll=180n wn={nnw} wp={nnw*mp}
+.ends and3b
+
+.subckt nand in1 Q vdd vss in2
+M1 vdd in1 Q vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+M2 vdd in2 Q vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+M3 Q in1 N001 N001 NMOS l={ll} w={1*{wn}} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+M4 N001 in2 vss vss NMOS l={ll} w={1*{wn}} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+.lib BU_180nm.lib
+.ends nand
+
+.subckt inv In _Q vdd vss
+M1 _Q In vss vss NMOS l={ll} w={wn} ad={450n*{wn}} as={450n*{wn}} pd={900n+{wn}} ps={1080n+{wn}}
+M2 vdd In _Q vdd PMOS l={ll} w={wp} ad={450n*{wp}} as={450n*{wp}} pd={900n+{wp}} ps={1080n+{wp}}
+.lib BU_180nm.lib
+.ends inv
+
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\phild\Documents\LTspiceXVII\lib\cmp\standard.mos
+.meas tran t1 find time when v(o1)=vv*0.1 rise 1
+.meas tran t2 find time when v(o1)=vv*0.9 rise 1
+.meas tran t3 find time when v(o1)=vv*0.1 fall 1
+.meas tran t4 find time when v(o1)=vv*0.9 fall 1
+.meas tran transition_up param abs(t2-t1)
+.meas tran transition_down param abs(t4-t3)
+.meas tran ratio param upslope/downslope
+.param vv=1.8 nnw=180n mp=2.21
+.lib BU_180nm.lib
+.op
+.tran 0 10n 0 10p
+.lib Bin2Dec.sub
+.lib Dec2Bin.sub
+.backanno
+.end
